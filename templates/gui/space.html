@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block body %}
+    <h2>Space Object Info (randomly generated) </h2>
+    <p><b>{{ state[0][0] }}</b>:&nbsp;<span class="uk-label">{{ state[0][1] }}</span></p>
+    <p>
+        {% for s in state[1:-1] %}
+        <b>{{ s[0] }}</b>:&nbsp;<span class="uk-label">{{ s[1] }}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {% endfor %}
+    </p>
+    <p><b>{{ state[-1][0] }}</b>:&nbsp;<span class="uk-label">{{ state[-1][1] }}</span></p>
+    <form action="" method="post" id="makeAction">
+        <button id="s0" onclick="document.getElementById('makeAction').action='{{ url_for('gui.act', env=env, action=0) }}'" class="uk-button uk-button-default">Do nothing</button>
+        <button id="s1" onclick="document.getElementById('makeAction').action='{{ url_for('gui.act', env=env, action=1) }}'" class="uk-button uk-button-default">Investigate</button>
+    </form>
+    <p> Make your own rule (e.g. always investigate Russian objects with velocity deviations above 0.5.)</p>
+
+<!--        color changing scripts-->
+    <script>$("#s0, #s1").css("color","rgb(255, 255, 255)");</script>
+    <script>$("#s0").css("background","rgb(0, {{ probabilities[0] * 200 }}, 0)");</script>
+    <script>$("#s1").css("background","rgb(0, {{ probabilities[1] * 200 }}, 0)");</script>
+{% endblock %}

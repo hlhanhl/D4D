@@ -1,0 +1,41 @@
+<!doctype html>
+<head>
+    <title>Demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='uikit.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <script src="{{ url_for('static', filename='uikit.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='uikit-icons.min.js') }}"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<!--    script for showing database on python console-->
+    <script>
+        $(document).ready(function(){
+            $("#dumpData").click(function(){
+                $.get("{{ url_for('gui.dump_data', env=env) }}");
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <nav><a href="{{ url_for('gui.landing') }}">Home</a></nav>
+    <div class="center">
+        {% block body %}{% endblock %}
+    </div>
+
+<!--    <div class="center">-->
+<!--        <h4>Debug information (this can be hidden later)</h4>-->
+<!--        {% block debug %}-->
+<!--            <p>Predicted action = {{ pred_action }} </p>-->
+<!--            <p>Probabilities = {{ probabilities }} </p>-->
+<!--        <button id="dumpData">Print data to console</button>-->
+<!--        {% endblock %}-->
+<!--    </div>-->
+</body>
+
+
+
+
